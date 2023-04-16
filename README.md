@@ -35,7 +35,7 @@ myCameraMan.loadTrack('./src/json/CM-animation.json',(track)=>{
   </tr>
   <tr>
     <td>3</td>
-    <td>Stop recording</td>
+    <td>Stop & ave recording</td>
   </tr>
   <tr>
     <td>4</td>
