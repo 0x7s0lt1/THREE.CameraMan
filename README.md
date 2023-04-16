@@ -11,6 +11,15 @@ camera = new THREE.PerspectiveCamera(
 
 // init CameraMan
 myCameraMan = new CameraMan(camera);
+
+// animate function
+function animate(){
+    requestAnimationFrame(animate);
+    renderer.render( scene, camera );
+    myCameraMan.update();
+}
+
+animate();
     
 ```
 Now you can start record tracks! With the help of the control keys.
