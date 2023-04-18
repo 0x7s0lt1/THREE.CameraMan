@@ -34,6 +34,9 @@ myCameraMan.loadTrack('./src/json/CM-animation.json',(track)=>{
 ```
 ## Control keys
 <table>
+        <hr>
+        <td>Key</td>
+        </th>
   <tr>
     <td>1</td>
     <td>Start recording</td>
