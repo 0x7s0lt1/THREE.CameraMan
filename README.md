@@ -1,7 +1,6 @@
 # Usage
 
 ```js
-// init THREE Camera
 camera = new THREE.PerspectiveCamera(
         45,
         window.innerWidth / window.innerHeight,
@@ -12,7 +11,6 @@ camera = new THREE.PerspectiveCamera(
 // init CameraMan
 myCameraMan = new CameraMan(camera);
 
-// animate function
 function animate(){
     requestAnimationFrame(animate);
     renderer.render( scene, camera );
@@ -26,7 +24,7 @@ Now you can start record tracks! With the help of the control keys.
 
 ## Play tracks
 ```js
-myCameraMan.loadTrack('./src/json/CM-animation.json',(track)=>{
+myCameraMan.loadTrack('track.json',(track)=>{
 
      myCameraMan.playTrack(track,speed,loop);
         
