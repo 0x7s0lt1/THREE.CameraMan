@@ -6,7 +6,7 @@ const camera = new THREE.PerspectiveCamera(
         window.innerWidth / window.innerHeight,
         0.2,
         1000
-    );
+);
 
 // init CameraMan
 const myCameraMan = new CameraMan(camera);
