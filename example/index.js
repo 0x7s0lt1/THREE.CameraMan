@@ -2,7 +2,6 @@ let scene,camera,renderer,controls,myCameraMan;
 
 import * as THREE from 'https://cdn.skypack.dev/three@v0.131.3';
 
-import { GLTFLoader } from 'https://cdn.skypack.dev/pin/three@v0.131.3-QQa34rwf1xM5cawaQLl8/mode=imports,min/unoptimized/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://cdn.skypack.dev/pin/three@v0.131.3-QQa34rwf1xM5cawaQLl8/mode=imports,min/unoptimized/examples/jsm/controls/OrbitControls.js';
 
 function init(){
@@ -18,10 +17,10 @@ function init(){
     );
 
     renderer = new THREE.WebGLRenderer({
-            antialias:false,
-            alpha: false,
-            canvas : document.getElementById('canvas')
-        });
+        antialias:false,
+        alpha: false,
+        canvas : document.getElementById('canvas')
+    });
 
 
     renderer.outputEncoding = THREE.sRGBEncoding;
@@ -49,7 +48,7 @@ function init(){
     const cube = new THREE.Mesh( 
         new THREE.BoxGeometry( 1, 1, 1 ),
         new THREE.MeshBasicMaterial( {color: 0x00ff00} )
-        );
+    );
 
     scene.add( cube );
 
@@ -66,7 +65,7 @@ function init(){
 
 
     myCameraMan.loadTrack('./example-track.json',(track)=>{
-        myCameraMan.playTrack(track,10,true);
+        myCameraMan.playTrack(track,60,true);
     });
 
 

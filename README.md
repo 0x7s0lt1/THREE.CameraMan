@@ -1,7 +1,7 @@
 # Usage
 
 ```js
-camera = new THREE.PerspectiveCamera(
+const camera = new THREE.PerspectiveCamera(
         45,
         window.innerWidth / window.innerHeight,
         0.2,
@@ -9,24 +9,28 @@ camera = new THREE.PerspectiveCamera(
     );
 
 // init CameraMan
-myCameraMan = new CameraMan(camera);
+const myCameraMan = new CameraMan(camera);
 
 function animate(){
     requestAnimationFrame(animate);
     renderer.render( scene, camera );
+    //update
     myCameraMan.update();
 }
 
 animate();
     
 ```
-Now you can start record tracks! With the help of the control keys.
+Now you can start recording tracks! With the help of the control keys.
 
 ## Play tracks
 ```js
-myCameraMan.loadTrack('track.json',(track)=>{
+myCameraMan.loadTrack('./track.json',(track)=>{
 
-     myCameraMan.playTrack(track,speed,loop);
+    const fps = 60;
+    const loop true;
+
+    myCameraMan.playTrack(track,fps,loop);
         
 });
 ```

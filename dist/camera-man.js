@@ -1,13 +1,14 @@
 class CameraMan{
 
+    c = 0;
+    paused = true;
+    interval = false;
+    frames = [];
+
     constructor(camera){
 
         this.camera = camera;
-        this.c = 0;
-        this.isPaused = true;
-        this.animIntervall = false;
-        this.animationArray = [];
-
+        
         this.result = document.createElement('a');
         this.result.style.display = 'none';
         document.body.appendChild(this.result);
@@ -17,40 +18,32 @@ class CameraMan{
     }
 
     start(){
-        this.isPaused = false;
-        console.log("[CAMERA MAN] recording STARTED!");
+        this.paused = false;
     }
 
     pause() {
-        this.isPaused = true;
-        console.log("[CAMERA MAN] recording PAUSED!");
+        this.paused = true;
     }
 
     stop(){
 
-        this.isPaused = true;
-        console.log("[CAMERA MAN] recording STOPED");
+        this.paused = true;
+        
         try{
-
-            const blob = new Blob([JSON.stringify(this.animationArray)],{type:"application/json;charset=utf-8"});
-            this.result.href = URL.createObjectURL(blob);
-            this.result.download = "CM-animation-"+new Date().toLocaleString()+".json";
-            this.result.click();
-            console.log("[CAMERA MAN] recording is SAVED as",this.result.download);
-
+            this.createResultJSON();
         }catch(err){
             console.error(err);
         }finally{
-            this.animationArray = [];
+            this.frames = [];
         }
         
     }
 
     update(){
 
-        if(!this.isPaused){
+        if(!this.paused){
 
-            this.animationArray.push({
+            this.frames.push({
                 p : { // position
                     x : this.camera.position.x,
                     y : this.camera.position.y,
@@ -67,22 +60,27 @@ class CameraMan{
 
     }
 
+    createResultJSON(){
+
+        const blob = new Blob([JSON.stringify(this.frames)],{type:"application/json;charset=utf-8"});
+        this.result.href = URL.createObjectURL(blob);
+        this.result.download = "CM-track-"+new Date().toLocaleString()+".json";
+
+        this.result.click();
+
+    }
+
     loadTrack(src,callback){
        
         fetch(src)
         .then(res => res.json())
-        .then(data => {
-
-            callback(data);
-            console.log(src + " is LOADED!");
-
-        })
+        .then(data => callback(data) )
 
     }
 
-    playTrack(track, loop){
+    playTrack(track, fps = 60, loop = true){
 
-        this.animIntervall = setInterval(function(){
+        this.interval = setInterval(function(){
 
             if(this.c < track.length){
 
@@ -95,27 +93,20 @@ class CameraMan{
                 if(loop){
                     this.c = 0;
                 }else{
-                    clearInterval(this.animIntervall);
-                    console.log('[CAMERA MAN] animation FINISED!');
+                    clearInterval(this.interval);
                 }
             }
         
-        }.bind(this),10);
+        }.bind(this),1000/fps);
 
     }
 
     pauseTrack(){
-
-        clearInterval(this.animIntervall);
-        console.log('[CAMERA MAN] animation PAUSED!');
-
+        clearInterval(this.interval);
     }
     stopTrack(){
-
-        clearInterval(this.animIntervall);
+        clearInterval(this.interval);
         this.c = 0;
-        console.log('[CAMERA MAN] animation STOPED!');
-
     }
 
     handleKeyDown(e){
