@@ -28,7 +28,7 @@ Now you can start recording tracks! With the help of the control keys.
 myCameraMan.loadTrack('./track.json',(track)=>{
 
     const fps = 60;
-    const loop true;
+    const loop = true;
 
     myCameraMan.playTrack(track,fps,loop);
         
